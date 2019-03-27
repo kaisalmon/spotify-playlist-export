@@ -52,24 +52,11 @@ tr {
 
 var cached_data;
 function save_csv() {
-<<<<<<< HEAD
-  Downloadify.create("download",{
-    swf:'downloadify.swf',
-    downloadImage:'download.png',
-    width: 100,
-    height: 30,
-    transparent: true,
-    append: false,
-    filename: 'playlist.csv',
-    data: $("#output").val(),
-  });
-=======
   var result = $("#output").val();
   var name = $('#playlist-detail h2').text();
   console.log(result)
   var file = new Blob([result], {type: 'text/csv'});
   saveAs(file, name+".csv");
->>>>>>> e29d894... Replaced save feature with modern API, using implementation from  https://github.com/eligrey/FileSaver.js/blob/master
 }
 
 window.onload=function(){
