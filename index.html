@@ -8,13 +8,9 @@
 
     <script type='text/javascript' src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-
+    <script src="js/fileSaver.js"></script>
 
     <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-
-    <script type="text/javascript" src="swfobject.js"></script>
-    <script type="text/javascript" src="downloadify.min.js"></script> 
-
 
     <link rel="stylesheet" type="text/css" href="https://d2c87l0yth4zbw.cloudfront.net/css/80278a9.css">
 
@@ -51,14 +47,15 @@ tr {
 
 
 
-    <script type='text/javascript'>//<![CDATA[ 
+    <script type='text/javascript'>//<![CDATA[
 
 
 var cached_data;
 function save_csv() {
+<<<<<<< HEAD
   Downloadify.create("download",{
     swf:'downloadify.swf',
-    downloadImage:'download.png', 
+    downloadImage:'download.png',
     width: 100,
     height: 30,
     transparent: true,
@@ -66,6 +63,13 @@ function save_csv() {
     filename: 'playlist.csv',
     data: $("#output").val(),
   });
+=======
+  var result = $("#output").val();
+  var name = $('#playlist-detail h2').text();
+  console.log(result)
+  var file = new Blob([result], {type: 'text/csv'});
+  saveAs(file, name+".csv");
+>>>>>>> e29d894... Replaced save feature with modern API, using implementation from  https://github.com/eligrey/FileSaver.js/blob/master
 }
 
 window.onload=function(){
@@ -138,8 +142,8 @@ window.onload=function(){
       headers: {
         'Authorization': 'Bearer ' + accessToken
       },
-      success: function(response) {         
-        var user_id = response.id.toLowerCase();         
+      success: function(response) {
+        var user_id = response.id.toLowerCase();
         $.ajax({
           url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
           headers: {
@@ -169,7 +173,7 @@ window.onload=function(){
     var playlists = [];
     var current_page = response;
     for (var item in current_page.items) {
-      item=current_page.items[item]; 
+      item=current_page.items[item];
       console.log(JSON.stringify(item));
       item['href']=item['tracks']['href'].slice(0,-6);
       playlists.push(item);
@@ -232,7 +236,7 @@ window.onload=function(){
       });
     }
   });
-}//]]>  
+}//]]>
 
     </script>
 
@@ -313,5 +317,3 @@ window.onload=function(){
 
 
 </html>
-
-
